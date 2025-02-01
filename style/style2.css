@@ -1,0 +1,20 @@
+main .container-register{
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.9)),url('/assets/login.png'); /* Path ke gambar */
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.60);
+}
+main .container-register input::placeholder{
+    color: #262626;
+    font-size: 14px;
+    font-weight: 600;
+}
+main .container-register input{
+    font-weight: 600;
+    border: none;
+    outline: none;
+}
+main .container-register input:focus{
+    background-color: #c9c8c8;
+}
