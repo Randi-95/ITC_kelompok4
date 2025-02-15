@@ -47,20 +47,20 @@
         </nav>
     </header>
 
-    <main class="mt-2"> 
-        <div class="left flex flex-col gap-4 h-[85vh] bg-gray-800 rounded-[16px] shadow-lg border border-gray-700">
-            <div class="navbar-left pt-10">
+    <main class="mt-2 md:grid md:grid-cols-[0.6fr_2fr] md:max-w-[1200px] md:mx-auto md:gap-5"> 
+        <div class="fixed bottom-0 md:bottom-auto left-0 right-0 md:relative  left flex justify-center md:justify-start md:flex-col gap-4 md:h-[85vh] bg-gray-800 md:rounded-[16px] shadow-lg border border-gray-700">
+            <div class="navbar-left md:pt-10">
                 <div class="navbar-nav flex justify-center">
-                    <ul class="flex flex-col gap-2 w-[100%]">
+                    <ul class="flex md:flex-col gap-2 w-[100%]">
                     <a href="index.html"><div class="flex bg-[#00A9D3]  hover:bg-[#34a6c2] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
-                             <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-house-user mr-2"></i>Post</li>
+                             <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-house-user mr-2"></i><span class="hidden md:inline">Post</span></li>
                         </div>
                     </a>
                     <a href="index.html"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
-                        <li class="text-white font-[600] text-[20px] "><i class="fa-regular fa-comment mr-2"></i>Forum</li>
+                        <li class="text-white font-[600] text-[20px] "><i class="fa-regular fa-comment mr-2"></i><span class="hidden md:inline">Forum</span></li>
                        </div>
                     </a>
-                    <p class="text-white font-[600] text-[16px] flex justify-center items-center">Top Topics<i class="fa-solid fa-caret-down pl-[20px] dropdown-button"></i></p>
+                    <p class="text-white font-[600] text-[16px] md:flex justify-center items-center hidden">Top Topics<i class="fa-solid fa-caret-down pl-[20px] dropdown-button"></i></p>
                     <div class="topik-forum">
                         <ul class="flex flex-wrap gap-2 w-[85%] mx-auto px-[20px]">
                             <li><a href="" class="text-white text-[10px] font-[600] bg-[#00A8E8] p-[4px] rounded-md hover:bg-[#0054AA] duration-[0.2s] ease-in">#Ransomware</a></li>
@@ -72,14 +72,14 @@
                     </ul>
                     </div>
                     <a href="index.html"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
-                        <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-gear mr-2"></i>Settings</li>
+                        <li class="text-white font-[600] text-[20px]"><i class="fa-solid fa-gear mr-2"></i><span class="hidden md:inline">Settings</span></li>
                         </div>
                     </a>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="center">
+        <div class="center p-2">
             <div class="h-[85px] bg-gray-800 rounded-[16px] shadow-lg p-2 border border-gray-700">
                 <div class="flex gap-[6px] search">
                     <p class="flex items-center"><i class="fa-solid fa-circle-user text-gray-400 text-[25px]"></i></p>

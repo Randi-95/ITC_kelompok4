@@ -2,13 +2,7 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
-main{
-    display: grid;
-    grid-template-columns: 0.6fr 2fr;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 20px;
-}
+
 
 .view-profil{
     border-top: 1px solid rgb(72, 72, 72);
