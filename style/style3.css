@@ -1,3 +1,7 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
 main{
     display: grid;
     grid-template-columns: 0.6fr 2fr;
@@ -22,20 +26,6 @@ main{
     display: none;
 }
 
-.search input::placeholder{
-    color: #fff6f6;
-    font-weight: 400;
-    font-size: 16px;
-}
-
-.search input{
-    border: 1px solid transparent;
-    padding-left: 32px;
-    font-weight: 400;
-
-}
-
 .search input:focus{
-    border: 1px solid black;
     outline: none;
 }
