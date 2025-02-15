@@ -23,3 +23,7 @@ body{
 .search input:focus{
     outline: none;
 }
+
+.username-profile{
+    cursor: pointer;
+}
