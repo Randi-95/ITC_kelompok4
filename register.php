@@ -76,7 +76,7 @@
                         echo '<P class= "text-red-600 text-bold">'. $error . '</p>';
                     }                   
                     ?>
-                    <form class="" method="POST" action="login.php" accept=""> 
+                    <form class="" method="POST" action="" accept=""> 
                         <div class="flex flex-col">
                             <label class="font-[700] text-[#eae9e9]" for="">Username :</label>
                             <div class="relative">
