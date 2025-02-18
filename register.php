@@ -1,9 +1,41 @@
+<?php
+    $error = '';
+    $hasil = false;
+    if (!empty($_POST)) {
+        $pdo = require 'koneksi.php';
+        if ($_POST['password'] != $_POST['password2']) {
+            $error = 'password must be the same';
+        } else if (strlen($_POST['password']) < 8) {
+            $error = 'Password must be at least 8 characters long';
+        } else {
+            $sql = 'select count(*) from users where email = :emailUser';
+            $query = $pdo->prepare($sql);
+            $query->execute(array('emailUser' => $_POST['email']));
+            $count = $query->fetchColumn();
+            if ($count > 0) {
+            $error = 'Use another Email';
+            } else {
+                $sql = "insert into users (username, email, password)
+                values (:username, :email, :password)";
+                $query2 = $pdo->prepare($sql);
+                $query2->execute(array(
+                    'username' => $_POST['username'],
+                    'email' => $_POST['email'],
+                    'password' => sha1($_POST['password'])
+                ));
+                $hasil = true;
+                unset($_POST);
+            }
+        }
+    }
+?>
+
 <!doctype html>
 <html class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- tailwind -->
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -35,30 +67,39 @@
                 <div class="w-[100%] p-3 lg:px-[30px]">
                     <h1 class="flex  text-[26px] text-[#eae9e9] font-[800]">Cyber <span class="text-[#0054AA]">Sec</span></h1>
                     <p class="text-[12px] font-[600] mb-4">Create an account to use the 4CyberSec platform</p>
-                    <form class="" action="POST" accept="">
+                    <!-- Text Feedback -->
+                    <?php if ($hasil == true) {?>
+                    <p class="text-green-500 text-bold">Registration Succeeded, you may log in now.</p>
+                    <?php } ?>
+                    <?php
+                    if ($error != '') {
+                        echo '<P class= "text-red-600 text-bold">'. $error . '</p>';
+                    }                   
+                    ?>
+                    <form class="" method="POST" action="register.php" accept=""> 
                         <div class="flex flex-col">
                             <label class="font-[700] text-[#eae9e9]" for="">Username :</label>
                             <div class="relative">
-                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="text" name="username" placeholder="Username" required>
+                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="text" name="username" placeholder="Username" required value="<?php echo isset($_POST['username']) ? $_POST['username'] : '';?>">
                                 <i class="fa-solid fa-user absolute top-3 left-2 text-[#4a4949]"></i>
                             </div>
                             <label class="font-[700] text-[#eae9e9]" for="">Email :</label>
                             <div class="relative">
-                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="email" name="email" placeholder="username123@gmail.com" required>
+                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="email" name="email" placeholder="username123@gmail.com" required value="<?php echo isset($_POST['email']) ? $_POST['email'] : '';?>">
                                 <i class="fa-solid fa-envelope absolute top-3 left-2 text-[#4a4949]"></i>
                             </div>
                             <label class="font-[700] text-[#eae9e9]" for="">Password :</label>
                             <div class="relative">
-                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="password" name="password" placeholder="***********" required>
+                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="password" name="password" placeholder="***********" required value="<?php echo isset($_POST['password']) ? $_POST['password'] : '';?>">
                                 <i class="fa-solid fa-key absolute top-3 left-2 text-[#4a4949]"></i>
                             </div>
                             <label class="font-[700] text-[#eae9e9]" for="">Password Confirmation :</label>
                             <div class="relative">
-                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="password" name="password" placeholder="***********" required>
+                                <input class="bg-[#dedbdb81] w-[100%] rounded-md h-[40px] hover:bg-[#c9c8c8] duration-[0.2s] px-8 mb-4" type="password" name="password2" placeholder="***********" required>
                                 <i class="fa-solid fa-key absolute top-3 left-2 text-[#4a4949]"></i>
                             </div>
                         </div>
-                        <button class="font-[700] text-white mt-2 bg-[#04CDFF] p-2 rounded-lg w-[100%] hover:bg-[#2d92ac] duration-[0.2s]" type="submit">Confirm</button>
+                        <button class="font-[700] text-white mt-2 bg-[#04CDFF] p-2 rounded-lg w-[100%] hover:bg-[#2d92ac] duration-[0.2s]" type="submit" action="utama.html">Confirm</button>
                     </form>
                     <div class="mt-4 flex gap-4 justify-center">
                     <p class="text-[12px] flex items-center font-[600] text-[#eae9e9]">Already have an account?</p>
