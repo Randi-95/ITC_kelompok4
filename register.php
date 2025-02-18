@@ -76,7 +76,7 @@
                         echo '<P class= "text-red-600 text-bold">'. $error . '</p>';
                     }                   
                     ?>
-                    <form class="" method="POST" action="register.php" accept=""> 
+                    <form class="" method="POST" action="login.php" accept=""> 
                         <div class="flex flex-col">
                             <label class="font-[700] text-[#eae9e9]" for="">Username :</label>
                             <div class="relative">
@@ -99,11 +99,11 @@
                                 <i class="fa-solid fa-key absolute top-3 left-2 text-[#4a4949]"></i>
                             </div>
                         </div>
-                        <button class="font-[700] text-white mt-2 bg-[#04CDFF] p-2 rounded-lg w-[100%] hover:bg-[#2d92ac] duration-[0.2s]" type="submit" action="utama.html">Confirm</button>
+                        <button class="font-[700] text-white mt-2 bg-[#04CDFF] p-2 rounded-lg w-[100%] hover:bg-[#2d92ac] duration-[0.2s]" type="submit">Confirm</button>
                     </form>
                     <div class="mt-4 flex gap-4 justify-center">
                     <p class="text-[12px] flex items-center font-[600] text-[#eae9e9]">Already have an account?</p>
-                    <a href="login.html"><p class="text-[12px] text-[#0054AA] flex items-center gap-1 font-[800] hover:text-[#04CDFF] duration-[0.3s]"><i class="fa-solid fa-right-to-bracket text-[14px]"></i> Login</p></a>
+                    <a href="login.php"><p class="text-[12px] text-[#0054AA] flex items-center gap-1 font-[800] hover:text-[#04CDFF] duration-[0.3s]"><i class="fa-solid fa-right-to-bracket text-[14px]"></i> Login</p></a>
                     </div>
                     
                 </div>
