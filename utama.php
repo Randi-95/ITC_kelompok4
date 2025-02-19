@@ -100,7 +100,7 @@ if (!isset($_SESSION['user'])) {
                              <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-house-user mr-2"></i><span class="hidden md:inline">Post</span></li>
                         </div>
                     </a>
-                    <a href="forum.html"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
+                    <a href="forum.php"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
                         <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-comments mr-2"></i><span class="hidden md:inline">Forum</span></li>
                        </div>
                     </a>
