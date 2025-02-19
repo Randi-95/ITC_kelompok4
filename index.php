@@ -2,6 +2,7 @@
 session_start();
 ?>
 
+
 <!doctype html>
 <html class="scroll-smooth">
 <head>
@@ -48,23 +49,11 @@ session_start();
           </div>
         </ul>
       </div>
-      <?php 
-      if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {?>
       <div class="flex gap-2 navbar-button">
         <div class="hidden md:block">
           <a href="register.php"><button class="bg-transparent border-[1.8px] border-[#0055AA] p-[6px] px-[10px] rounded-md button"><p class="text-[12px] text-white font-[600] ">Register</p></button></a>
           <a href="login.php"><button class="bg-[#0055AA] p-[6px] px-[10px] rounded-md button"><p class="text-[12px] text-white font-[600] ">Login</p></button></a>
         </div>
-        <?php } else {?>
-          <div class="flex gap-2 navbar-button">
-            <div class="hidden md:block">
-              <a href="logout.php"><button  class="bg-[#0055AA] p-[6px] px-[10px] rounded-md button" href="logout.php"><p class="text-[12px] text-white font-[600] ">Logout</p></button></a>
-            </div>
-          </div>
-          
-        <?php echo ''; }?>
-        <i class="fa-solid fa-bars flex items-center hamburger text-white md:hidden text-[30px] cursor-pointer"></i>
-        
       </div>
     </header>
 

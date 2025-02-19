@@ -18,7 +18,7 @@ if (!empty($_POST)) {
             'username' => $user['username'],
 
         );
-        header("Location: index.php");
+        header("Location: utama.php");
     }
 }
 ?>

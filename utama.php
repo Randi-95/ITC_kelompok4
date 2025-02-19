@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -73,7 +83,7 @@
                         <ul class="flex flex-col gap-4">
                             <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
                             <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-gear mr-2"></i>Settings</a></li>
-                            <li class="text-[14px] font-[400]"><a href="index.html"><i class="fa-solid fa-right-from-bracket text-red-500 mr-2"></i>Logout</a></li>
+                            <li class="text-[14px] font-[400]"><a href="logout.php"><i class="fa-solid fa-right-from-bracket text-red-500 mr-2"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>
