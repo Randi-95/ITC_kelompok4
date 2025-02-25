@@ -73,7 +73,7 @@
                         <ul class="flex flex-col gap-4">
                             <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
                             <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-gear mr-2"></i>Settings</a></li>
-                            <li class="text-[14px] font-[400]"><a href="index.html"><i class="fa-solid fa-right-from-bracket text-red-500 mr-2"></i>Logout</a></li>
+                            <li class="text-[14px] font-[400]"><a href="logout.php"><i class="fa-solid fa-right-from-bracket text-red-500 mr-2"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
             <div class="navbar-left md:pt-10">
                 <div class="navbar-nav flex justify-center">
                     <ul class="flex md:flex-col gap-2 w-[100%]">
-                    <a href="utama.html"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
+                    <a href="utama.php"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
                              <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-house-user mr-2"></i><span class="hidden md:inline">Post</span></li>
                         </div>
                     </a>

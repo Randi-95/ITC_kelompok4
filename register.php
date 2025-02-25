@@ -58,7 +58,8 @@
 <body class="">
 
     <main class="bg-[#0054AA] lg:p-4" >
-        <div class="container-register drop-shadow-2xl h-screen lg:h-[95vh] lg:rounded-[30px] flex flex-col md:flex-row">
+        <div class="container-register drop-shadow-2xl h-screen bg-cover bg-center lg:h-[95vh] lg:rounded-[30px] flex flex-col md:flex-row"
+             style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('assets/login.png');">
             <div class="judul-section hidden h-[50%] md:w-[50%] md:h-[100%] lg:flex flex-col items-center justify-center">
                 <h1 class="font-[700] text-white text-[20px] lg:text-[40px]">WELCOME TO Cyber<span class="text-[#0054AA]">Sec</span></h1>
                 <p class="leading-1 text-white text-[10px] text-center w-[70%]">Join Cyber<span class="text-[#0054AA]">Sec</span>! Learn, connect, and grow with experts. Access resources, share knowledge, and secure the digital world. Sign up now!</p>
