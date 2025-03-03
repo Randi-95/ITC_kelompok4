@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -127,8 +130,32 @@
                     <a href="buat_diskusi.php"><button class="bg-[#0284c7] text-[10px]  px-[10px] py-[12px] rounded-[6px] text-[#fff] font-[700] hover:bg-[#4dbcf4]  duration-[0.4s] ease-in-out z-50">Create Discussion</button></a>
                 </div>
             </div>
+            <?php
+            if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { 
+                $pdo = require 'koneksi.php';
+                $sql = "SELECT judul, tanggal, username FROM topik
+                INNER JOIN users ON topik.id_user = users.id
+                ORDER BY tanggal DESC";
+                $query = $pdo->prepare($sql);
+                $query->execute();
+                ?>
+                <?php 
+                while($data = $query->fetch()) {?>    
+                    <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
+                        <blockquote class="text-gray-700 italic">
+                            <p>
+                                <a href="#" class="text-blue-600 font-semibold hover:underline"><?php echo htmlentities($data['judul']); ?></a>
+                            </p>
+                        </blockquote>
+                        <figcaption class="text-gray-500 text-[10px] mt-2">
+                            Dari: <span class="font-medium text-gray-300"> <?php echo htmlentities($data['username']); ?> </span> – <?php echo date('d M Y H:i', strtotime($data['tanggal'])); ?>
+                        </figcaption>
+                    </figure>
+                
+            <?php }?>
+            <?php }?>   
 
-            <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
+            <!-- <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
                 <blockquote class="text-gray-700 italic">
                     <p>
                         <a href="#" class="text-blue-600 font-semibold hover:underline">Judul Artikel</a>
@@ -247,17 +274,7 @@
                 <figcaption class="text-gray-500 text-[10px] mt-2">
                     Dari: <span class="font-medium text-gray-300">Nama Pengirim</span> – 10 Feb 2025 14:30
                 </figcaption>
-            </figure>
-            <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
-                <blockquote class="text-gray-700 italic">
-                    <p>
-                        <a href="#" class="text-blue-600 font-semibold hover:underline">Judul Artikel</a>
-                    </p>
-                </blockquote>
-                <figcaption class="text-gray-500 text-[10px] mt-2">
-                    Dari: <span class="font-medium text-gray-300">Nama Pengirim</span> – 10 Feb 2025 14:30
-                </figcaption>
-            </figure>
+            </figure> -->
         </div>
     </main>
 

@@ -1,5 +1,17 @@
 <?php
 session_start();
+if(!empty($_POST)) {
+    $pdo = require 'koneksi.php';
+    $sql = "insert into topik (judul, deskripsi, tanggal, id_user) values (:judul, :deskripsi, now(), :id_user)";
+    $query = $pdo->prepare($sql);
+    $query->execute(array(
+        'judul' => $_POST['judul'],
+        'deskripsi' => $_POST['deskripsi'],
+        'id_user' => $_SESSION['user']['id'],
+    ));
+    header("location: buat_diskusi.php?sukses=1");
+    exit;
+}
 ?>
 
 
@@ -31,6 +43,12 @@ session_start();
     <div class="min-h-screen flex items-center justify-center bg-gray-900 ">
         <div class="max-w-lg w-full bg-gray-800  shadow-lg rounded-lg p-6">
             <h2 class="text-2xl font-[800] text-[#0054AA] mb-4 text-center">Buat Topik Baru</h2>
+            <!-- feedback success -->
+            <?php
+            if(isset($_GET['sukses']) && $_GET['sukses'] == '1') {
+                echo '<p class="text-green-500">Discussion Created</p>';
+                
+            }?>
             <form method="POST" action="">
                 <div class="mb-4">
                     <label class="block text-[#0054AA] font-medium mb-2">Judul</label>
