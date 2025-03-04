@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'koneksi.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@ session_start();
     <header class="bg-gray-800 shadow-lg">
         <nav class="w-[90%] p-4 mx-auto flex items-center justify-between text-white">
             <div class="nav-judul">
-                <h1 class="font-[700] text-[26px] judul text-white">Cyber<span class="text-[#0054AA] kata-2">Sec </span></h1>
+                <a href="forum.php"><h1 class="font-[700] text-[12px] md:text-[26px] judul text-white"><i class="fa-solid fa-arrow-left"></i> Forum<span class="text-[#0054AA] kata-2"> discussion </span></h1></a>
             </div>
             <div class="nav-icon flex items-center">
                 <div class="flex gap-4">
@@ -87,16 +88,16 @@ session_start();
         </nav>
     </header>
 
-    <main class="mt-2 md:grid md:grid-cols-[0.6fr_2fr] md:p-6 md:mx-auto md:gap-5"> 
-        <div class="fixed bottom-0 md:bottom-auto left-0 right-0 md:relative  left flex justify-center md:justify-start md:flex-col gap-4 md:h-full bg-gray-800 md:rounded-[16px] shadow-lg border border-gray-700">
+    <main class="mt-2 md:p-10 p-2"> 
+        <div class="fixed md:hidden bottom-0 md:bottom-auto left-0 right-0 md:relative  left flex justify-center md:justify-start md:flex-col gap-4 md:h-[85vh] bg-gray-800 md:rounded-[16px] shadow-lg border border-gray-700">
             <div class="navbar-left md:pt-10">
                 <div class="navbar-nav flex justify-center">
                     <ul class="flex md:flex-col gap-2 w-[100%]">
-                    <a href="utama.php"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
+                    <a href="#"><div class="flex hover:bg-[#34a6c2] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
                              <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-house-user mr-2"></i><span class="hidden md:inline">Post</span></li>
                         </div>
                     </a>
-                    <a href="#"><div class="flex bg-[#00A9D3]  hover:bg-[#34a6c2] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
+                    <a href="forum.php"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
                         <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-comments mr-2"></i><span class="hidden md:inline">Forum</span></li>
                        </div>
                     </a>
@@ -119,48 +120,79 @@ session_start();
                 </div>
             </div>
         </div>
-        <div class="center p-2">
-            <div class=" bg-gray-800 rounded-[16px] shadow-lg p-2 border border-gray-700">
-                <div class="flex gap-[6px] search">
-                    <p class="flex items-center"><i class="fa-solid fa-circle-user text-gray-400 text-[25px]"></i></p>
-                    <div class="relative search w-[100%]">
-                        <input type="text" placeholder="Search something..." class="w-full p-3 pl-10 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-gray-400 text-[14px]"></i>
-                    </div>
-                </div>
 
-                <div class="w-[100%] ml-[30px] mt-[10px]">
-                    <a href="buat_diskusi.php"><button class="bg-[#0284c7] text-[10px]  px-[10px] py-[12px] rounded-[6px] text-[#fff] font-[700] hover:bg-[#4dbcf4]  duration-[0.4s] ease-in-out z-50">Create Discussion</button></a>
-                </div>
-            </div>
-            <?php
-            if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { 
-                $pdo = require 'koneksi.php';
-                $sql = "SELECT judul, tanggal, username, email, topik.id FROM topik
-                INNER JOIN users ON topik.id_user = users.id
-                ORDER BY tanggal DESC";
-                $query = $pdo->prepare($sql);
-                $query->execute();
+        <div class="">
+        <?php
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $pdo = require 'koneksi.php';
+            $sql = "SELECT topik.*, users.username, users.email FROM topik
+                    INNER JOIN users ON topik.id_user=users.id
+                    WHERE topik.id=:id";
+            $query = $pdo->prepare($sql);
+            $query->execute(array('id' => $_GET['id']));
+            $topik = $query->fetch();
+
+            if (empty($topik)) {
+                echo '
+                <div class="flex">
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 max-w-lg rounded-lg shadow-lg">
+                        <p class="font-semibold text-lg">Topik Tidak Ditemukan</p>
+                        <p class="text-sm mt-1">Topik yang Anda cari tidak tersedia atau telah dihapus.</p>
+                        <a href="utama.php" class="mt-3 inline-block px-4 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 transition duration-300">
+                            Kembali ke Beranda
+                        </a>
+                    </div>
+                </div>';
+            }else {
                 ?>
-                <?php 
-                while($data = $query->fetch()) {?> 
-                        <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
-                            <div class="flex items-center gap-2">
-                                <div class="">
-                                     <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($data['email']))); ?>?s=48&d=monsterid" class="rounded-[50%]">
-                                </div>
-                                <blockquote class="text-gray-700 italic">
-                                    <p>
-                                        <a href="lihat-topik.php?id=<?php echo $data['id'];?>" class="text-blue-600 font-semibold hover:underline"><?php echo htmlentities($data['judul']); ?></a>
-                                    </p>
-                                </blockquote>
+                    <div class="flex gap-x-[10px] w-full mb-2">
+                        <div>
+                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($topik['email']))); ?>?s=48&d=monsterid" class="rounded-[50%]">
+                        </div>
+                        <div class="flex flex-col">
+                            <h2 class="text-white font-[600]  md:text-[30px] leading-tight">
+                                <?php echo htmlentities($topik['username'])?>
+                            </h2>
+                            <small class="text-[10px] text-[#dcdbdb] leading-tight">
+                                <?php echo date('d M Y H:i', strtotime($topik['tanggal'])); ?>
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <h2 class="text-white md:text-[30px] font-[600] md:leading-[30px]" ><?php echo htmlentities($topik['judul'])?></h2>
+                        <p class="text-[#c4c2c2] mt-4 leading-[14px] md:leading-5 text-[12px] md:text-[15px]"><?php echo nl2br(htmlentities($topik['deskripsi']))?></p>
+                    </div>
+                    <hr class="mt-2 border border-[#0054AA]">
+                    <div class="flex items-start gap-2.5 mt-4">
+                    <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-7 h-7">
+                        <div class="flex flex-col gap-1 w-full max-w-[320px]">
+                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                <span class="text-sm font-semibold text-gray-900 dark:text-white">Randi</span>
+                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">04 Mar 2025 00:17</span>
                             </div>
-                            <figcaption class="text-gray-500 text-[10px] mt-2">
-                                Dari: <span class="font-medium text-gray-300"> <?php echo htmlentities($data['username']); ?> </span> – <?php echo date('d M Y H:i', strtotime($data['tanggal'])); ?>
-                            </figcaption>
-                        </figure> 
-            <?php }?>
-            <?php }?>   
+                            <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                                <p class="text-sm font-normal text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-2 border border-[#0054AA]">
+                    <form action="jawab-topik.php" method="POST" class="mt-4">
+                        <div class="flex items-start gap-3">
+                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-12 h-12">
+                            <div class="w-full">
+                                <textarea name="komentar" class="w-full mt-1 p-2 text-white text-[12px] bg-transparent border border-[#0054AA] rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all duration-300 resize-none shadow-sm mb-4 h-[100px]" placeholder="write your comments..."></textarea>
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit" class="bg-[#0054AA] text-white px-4 py-2 rounded-lg font-[400] ">Send</button>
+                        </div>
+                    </form>
+                <?php
+            }
+        }
+        ?>
+
         </div>
     </main>
 

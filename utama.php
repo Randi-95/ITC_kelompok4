@@ -35,14 +35,18 @@ if (!isset($_SESSION['user'])) {
       </head>
 <body class="bg-gray-900 min-h-screen">
     <header class="bg-gray-800 shadow-lg">
-        <nav class="w-[90%] p-2 mx-auto flex items-center justify-between text-white">
+        <nav class="w-[90%] p-4 mx-auto flex items-center justify-between text-white">
             <div class="nav-judul">
                 <h1 class="font-[700] text-[26px] judul text-white">Cyber<span class="text-[#0054AA] kata-2">Sec </span></h1>
             </div>
             <div class="nav-icon flex items-center">
                 <div class="flex gap-4">
                     <button class="notifikasi"><i class="fa-regular fa-bell text-[25px]"></i></button>
-                    <button class="username-profile border border-gray-700 bg-gray-700 p-1 rounded-md flex items-center justify-center gap-2 text-[14px]"> <span class="font-[500] pb-[5px]">Username</span><i class="fa-solid fa-circle-user text-gray-400 text-xl"></i></button>
+                    <button class="username-profile border border-gray-700 bg-gray-700 p-1 rounded-md flex items-center gap-2 text-[14px] h-fit w-fit">
+                        <span class="font-[500] flex items-center">Username</span>
+                        <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-7 h-7">
+                    </button>
+
                 </div>
                 <div class="relative">
                     <div class="isi-notifikasi hidden absolute left-[-300px] z-50 bg-gray-800 top-[20px] w-[300px] h-[400px] p-4 border border-gray-700 shadow-lg rounded-lg">

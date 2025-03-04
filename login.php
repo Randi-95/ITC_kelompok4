@@ -16,7 +16,7 @@ if (!empty($_POST)) {
         $_SESSION['user']= array(
             'id' => $user['id'],
             'username' => $user['username'],
-
+            'email' => $user['email']
         );
         header("Location: utama.php");
     }
