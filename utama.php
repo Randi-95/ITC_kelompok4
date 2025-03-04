@@ -43,7 +43,7 @@ if (!isset($_SESSION['user'])) {
                 <div class="flex gap-4">
                     <button class="notifikasi"><i class="fa-regular fa-bell text-[25px]"></i></button>
                     <button class="username-profile border border-gray-700 bg-gray-700 p-1 rounded-md flex items-center gap-2 text-[14px] h-fit w-fit">
-                        <span class="font-[500] flex items-center">Username</span>
+                        <span class="font-[500] flex items-center"><?php echo htmlentities($_SESSION['user']['username']) ?></span>
                         <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-7 h-7">
                     </button>
 

@@ -37,7 +37,7 @@ require_once 'koneksi.php';
                 <div class="flex gap-4">
                     <button class="notifikasi"><i class="fa-regular fa-bell text-[25px]"></i></button>
                     <button class="username-profile border border-gray-700 bg-gray-700 p-1 rounded-md flex items-center gap-2 text-[14px] h-fit w-fit">
-                        <span class="font-[500] flex items-center">Username</span>
+                        <span class="font-[500] flex items-center"><?php echo htmlentities($_SESSION['user']['username']) ?></span>
                         <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-7 h-7">
                     </button>
                 </div>
@@ -164,24 +164,37 @@ require_once 'koneksi.php';
                         <p class="text-[#c4c2c2] mt-4 leading-[14px] md:leading-5 text-[12px] md:text-[15px]"><?php echo nl2br(htmlentities($topik['deskripsi']))?></p>
                     </div>
                     <hr class="mt-2 border border-[#0054AA]">
+                    <?php
+                    $sql2 = "SELECT komentar.*, users.username, users.email FROM komentar
+                    INNER JOIN users ON users.id=komentar.id_user
+                    WHERE id_topik=:id_topik";
+                    $query2 = $pdo->prepare($sql2);
+                    $query2->execute(array(
+                        'id_topik' => $_GET['id']
+                    ));
+                    while($komentar = $query2->fetch()) {?>
+                    
                     <div class="flex items-start gap-2.5 mt-4">
-                    <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-7 h-7">
+                    <img src="https://www.gravatar.com/avatar/<?php echo md5(($komentar['email'])); ?>?s=48&d=monsterid" class="rounded-[50%] w-7 h-7">
                         <div class="flex flex-col gap-1 w-full max-w-[320px]">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                <span class="text-sm font-semibold text-gray-900 dark:text-white">Randi</span>
-                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">04 Mar 2025 00:17</span>
+                                <span class="text-sm font-semibold text-gray-900 dark:text-white"><?php echo htmlentities($komentar['username']); ?></span>
+                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><?php echo date('d M Y H:i', strtotime($komentar['tanggal'])); ?></span>
                             </div>
                             <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                                <p class="text-sm font-normal text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
+                                <p class="text-sm font-normal text-gray-900 dark:text-white"><?php echo nl2br(htmlentities($komentar['komentar'])); ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php }?>
+
                     <hr class="mt-2 border border-[#0054AA]">
-                    <form action="jawab-topik.php" method="POST" class="mt-4">
+                    <form  method="POST" action="jawab-topik.php" class="mt-4">
                         <div class="flex items-start gap-3">
                             <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-12 h-12">
                             <div class="w-full">
                                 <textarea name="komentar" class="w-full mt-1 p-2 text-white text-[12px] bg-transparent border border-[#0054AA] rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all duration-300 resize-none shadow-sm mb-4 h-[100px]" placeholder="write your comments..."></textarea>
+                                <input type="hidden" value="<?php echo $topik['id'];?>" name="id_topik">
                             </div>
                         </div>
                         <div class="flex justify-end">
