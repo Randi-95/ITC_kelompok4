@@ -174,15 +174,15 @@ require_once 'koneksi.php';
                     ));
                     while($komentar = $query2->fetch()) {?>
                     
-                    <div class="flex items-start gap-2.5 mt-4">
-                    <img src="https://www.gravatar.com/avatar/<?php echo md5(($komentar['email'])); ?>?s=48&d=monsterid" class="rounded-[50%] w-7 h-7">
+                    <div class="flex items-start gap-2.5 mt-8">
+                    <img src="https://www.gravatar.com/avatar/<?php echo md5(($komentar['email'])); ?>?s=48&d=monsterid" class="rounded-[50%] w-10 h-10">
                         <div class="flex flex-col gap-1 w-full max-w-[320px]">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                <span class="text-sm font-semibold text-gray-900 dark:text-white"><?php echo htmlentities($komentar['username']); ?></span>
-                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><?php echo date('d M Y H:i', strtotime($komentar['tanggal'])); ?></span>
+                                <span class="text-sm font-semibold text-white"><?php echo htmlentities($komentar['username']); ?></span>
+                                <span class="text-sm font-normal text-gray-500"><?php echo date('d M Y H:i', strtotime($komentar['tanggal'])); ?></span>
                             </div>
                             <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                                <p class="text-sm font-normal text-gray-900 dark:text-white"><?php echo nl2br(htmlentities($komentar['komentar'])); ?></p>
+                                <p class="text-sm font-normal text-white break-words whitespace-pre-wrap"><?php echo nl2br(htmlentities($komentar['komentar'])); ?></p>
                             </div>
                         </div>
                     </div>
