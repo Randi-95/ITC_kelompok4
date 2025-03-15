@@ -17,15 +17,3 @@ window.addEventListener('scroll', function(){
     navbar.classList.toggle('scrolling-active', windowScrool);
 })
 
-const closeLogin = document.querySelector('.button-login')
-const login = document.querySelector('.login')
-const getStarted = document.querySelector('.get-started')
-
-closeLogin.addEventListener('click', function(){
-    login.classList.add('hidden')
-})
-
-getStarted.addEventListener('click', function(){
-    login.classList.remove('hidden')
-})
-

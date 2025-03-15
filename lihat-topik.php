@@ -181,7 +181,7 @@ require_once 'koneksi.php';
                                 <span class="text-sm font-semibold text-white"><?php echo htmlentities($komentar['username']); ?></span>
                                 <span class="text-sm font-normal text-gray-500"><?php echo date('d M Y H:i', strtotime($komentar['tanggal'])); ?></span>
                             </div>
-                            <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                            <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-700 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                                 <p class="text-sm font-normal text-white break-words whitespace-pre-wrap"><?php echo nl2br(htmlentities($komentar['komentar'])); ?></p>
                             </div>
                         </div>
@@ -197,7 +197,7 @@ require_once 'koneksi.php';
                                 <input type="hidden" value="<?php echo $topik['id'];?>" name="id_topik">
                             </div>
                         </div>
-                        <div class="flex justify-end">
+                        <div class="flex justify-end mb-[100px]">
                             <button type="submit" class="bg-[#0054AA] text-white px-4 py-2 rounded-lg font-[400] ">Send</button>
                         </div>
                     </form>
