@@ -51,11 +51,11 @@ if(!empty($_POST)) {
                         'password' => sha1($_POST['password_baru']),
                         'id' => $_SESSION['user']['id']
                     ));
-                    header("location: profile.php");
+                    header("location: profile.php?changed=1");
                 }
             }
         } else {
-            header("location: profile.php");
+            header("location: profile.php?changed=1");
         }
 
         
@@ -137,7 +137,9 @@ if(!empty($_POST)) {
                 <?php if ($error != '') {
                    echo '<p class="text-red-600">' .$error.'</p>';
                 }?> 
-                
+                <?php if($_GET['changed'] && $_GET['changed'] == '1') {?>
+                    <p class="text-green-500">User Information has been changed</p>
+                    <?php }?>
                 <form method="POST" action="">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>

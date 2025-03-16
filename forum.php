@@ -82,7 +82,7 @@ if (!isset($_SESSION['user'])) {
                 <div class="relative">
                     <div class="isi-profile hidden absolute z-50 border border-gray-700 bg-gray-800 shadow-lg w-[120px] h-[160px] p-4 rounded-lg left-[-100px] top-[20px]">
                         <ul class="flex flex-col gap-4">
-                            <li class="text-[14px] font-[400]"><a href="profile.php"><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
+                            <li class="text-[14px] font-[400]"><a href="profile.php?changed=0"><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
                             <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-gear mr-2"></i>Settings</a></li>
                             <li class="text-[14px] font-[400]"><a href="logout.php"><i class="fa-solid fa-right-from-bracket text-red-500 mr-2"></i>Logout</a></li>
                         </ul>
