@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +82,7 @@ session_start();
                 <div class="relative">
                     <div class="isi-profile hidden absolute z-50 border border-gray-700 bg-gray-800 shadow-lg w-[120px] h-[160px] p-4 rounded-lg left-[-100px] top-[20px]">
                         <ul class="flex flex-col gap-4">
-                            <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
+                            <li class="text-[14px] font-[400]"><a href="profile.php"><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
                             <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-gear mr-2"></i>Settings</a></li>
                             <li class="text-[14px] font-[400]"><a href="logout.php"><i class="fa-solid fa-right-from-bracket text-red-500 mr-2"></i>Logout</a></li>
                         </ul>
@@ -138,9 +143,12 @@ session_start();
                 $pdo = require 'koneksi.php';
                 $sql = "SELECT judul, tanggal, username, email, topik.id FROM topik
                 INNER JOIN users ON topik.id_user = users.id
+                WHERE topik.id_user = :id_user
                 ORDER BY tanggal DESC";
-                $query = $pdo->prepare($sql);
-                $query->execute();
+    
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':id_user', $_SESSION['user']['id'], PDO::PARAM_INT);
+        $query->execute();
                 ?>
                 <?php 
                 while($data = $query->fetch()) {?> 
@@ -156,7 +164,7 @@ session_start();
                                 </blockquote>
                             </div>
                             <figcaption class="text-gray-500 text-[10px] mt-2">
-                                Dari: <span class="font-medium text-gray-300"> <?php echo htmlentities($data['username']); ?> </span> – <?php echo date('d M Y H:i', strtotime($data['tanggal'])); ?>
+                                By: <span class="font-medium text-gray-300"> <?php echo htmlentities($data['username']); ?> </span> – <?php echo date('d M Y H:i', strtotime($data['tanggal'])); ?>
                             </figcaption>
                         </figure> 
             <?php }?>

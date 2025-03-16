@@ -1,6 +1,11 @@
 <?php
-session_start();
+
 require_once 'koneksi.php';
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +83,7 @@ require_once 'koneksi.php';
                 <div class="relative">
                     <div class="isi-profile hidden absolute z-50 border border-gray-700 bg-gray-800 shadow-lg w-[120px] h-[160px] p-4 rounded-lg left-[-100px] top-[20px]">
                         <ul class="flex flex-col gap-4">
-                            <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
+                            <li class="text-[14px] font-[400]"><a href="profile.php"><i class="fa-solid fa-user mr-2"></i>Profile</a></li>
                             <li class="text-[14px] font-[400]"><a href=""><i class="fa-solid fa-gear mr-2"></i>Settings</a></li>
                             <li class="text-[14px] font-[400]"><a href="logout.php"><i class="fa-solid fa-right-from-bracket text-red-500 mr-2"></i>Logout</a></li>
                         </ul>
@@ -145,24 +150,48 @@ require_once 'koneksi.php';
                 </div>';
             }else {
                 ?>
-                    <div class="flex gap-x-[10px] w-full mb-2">
-                        <div>
-                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($topik['email']))); ?>?s=48&d=monsterid" class="rounded-[50%]">
+                    <!-- Topic Header -->
+                <div class="bg-gradient-to-br bg-[rgba(0,20,60,0.3)] p-6 rounded-2xl mb-6 shadow-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-shrink-0">
+                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($topik['email']))); ?>?s=64&d=monsterid" 
+                                 class="rounded-full w-14 h-14 border-2 border-[#00A8E8]/30 shadow-lg shadow-[#00A8E8]/10">
                         </div>
                         <div class="flex flex-col">
-                            <h2 class="text-white font-[600]  md:text-[30px] leading-tight">
-                                <?php echo htmlentities($topik['username'])?>
-                            </h2>
-                            <small class="text-[10px] text-[#dcdbdb] leading-tight">
+                            <div class="flex items-center">
+                                <h2 class="text-xl font-bold text-white">
+                                    <?php echo htmlentities($topik['username'])?>
+                                </h2>
+                                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#00A8E8]/20 text-[#00A8E8]">
+                                    Author
+                                </span>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-400 mt-1">
+                                <i class="fa-regular fa-clock mr-1.5"></i>
                                 <?php echo date('d M Y H:i', strtotime($topik['tanggal'])); ?>
-                            </small>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="">
-                        <h2 class="text-white md:text-[30px] font-[600] md:leading-[30px]" ><?php echo htmlentities($topik['judul'])?></h2>
-                        <p class="text-[#c4c2c2] mt-4 leading-[14px] md:leading-5 text-[12px] md:text-[15px]"><?php echo nl2br(htmlentities($topik['deskripsi']))?></p>
+                    <!-- Topic Content -->
+                    <h1 class="topic-title text-2xl md:text-3xl font-bold mb-4 text-white"><?php echo htmlentities($topik['judul'])?></h1>
+                    <div class="text-gray-300 mb-4 leading-relaxed">
+                        <p class="whitespace-pre-wrap"><?php echo nl2br(htmlentities($topik['deskripsi']))?></p>
                     </div>
+                    
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="text-xs font-medium bg-gray-700/50 px-3 py-1.5 rounded-full text-gray-300">
+                            <i class="fa-solid fa-message mr-1"></i> 
+                            <?php 
+                                $commentSql = "SELECT COUNT(*) FROM komentar WHERE id_topik = :id";
+                                $commentQuery = $pdo->prepare($commentSql);
+                                $commentQuery->execute(['id' => $_GET['id']]);
+                                echo $commentQuery->fetchColumn(); 
+                            ?> replies
+                        </span>
+                    </div>
+                </div>
+
                     <hr class="mt-2 border border-[#0054AA]">
                     <?php
                     $sql2 = "SELECT komentar.*, users.username, users.email FROM komentar
@@ -188,17 +217,26 @@ require_once 'koneksi.php';
                     </div>
                     <?php }?>
 
-                    <hr class="mt-2 border border-[#0054AA]">
-                    <form  method="POST" action="jawab-topik.php" class="mt-4">
-                        <div class="flex items-start gap-3">
-                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-12 h-12">
+                    <hr class="mt-4 border-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60">
+                    <form method="POST" action="jawab-topik.php" class="mt-6">
+                        <div class="flex items-start gap-4">
+                            <div class="overflow-hidden rounded-full  p-[2px] bg-gradient-to-br from-blue-300 to-blue-600">
+                                <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-full w-12 h-12">
+                            </div>
                             <div class="w-full">
-                                <textarea name="komentar" class="w-full mt-1 p-2 text-white text-[12px] bg-transparent border border-[#0054AA] rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all duration-300 resize-none shadow-sm mb-4 h-[100px]" placeholder="write your comments..."></textarea>
+                                <div class="relative w-full mb-4">
+                                    <textarea name="komentar" 
+                                        class="w-full p-3 text-white text-sm bg-[rgba(0,20,60,0.3)] backdrop-blur-sm border border-blue-500/30 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300 resize-none shadow-lg h-[120px]" 
+                                        placeholder="Share your thoughts..." required></textarea>
+                                </div>
                                 <input type="hidden" value="<?php echo $topik['id'];?>" name="id_topik">
                             </div>
                         </div>
                         <div class="flex justify-end mb-[100px]">
-                            <button type="submit" class="bg-[#0054AA] text-white px-4 py-2 rounded-lg font-[400] ">Send</button>
+                            <button type="submit" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-blue-500/30 transition-all duration-300 flex items-center gap-2">
+                                <span>Send</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </button>
                         </div>
                     </form>
                 <?php

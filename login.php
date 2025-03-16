@@ -13,11 +13,11 @@ if (!empty($_POST)) {
         $hasil = false;
     } else {
         $hasil = true;
-        $_SESSION['user']= array(
+        $_SESSION['user'] = [
             'id' => $user['id'],
             'username' => $user['username'],
             'email' => $user['email']
-        );
+        ];
         header("Location: utama.php");
     }
 }
