@@ -139,7 +139,7 @@ if (!isset($_SESSION['user'])) {
                     </div>
                 </div>
                 <div class="ml-[30px] mt-[10px]">
-                    <a href="buat_diskusi.php"><button class="bg-[#0284c7] text-[10px]  px-[10px] py-[12px] rounded-[6px] text-[#fff] font-[700] hover:bg-[#4dbcf4]  duration-[0.4s] ease-in-out z-50">Create Discussion</button></a>
+                    <a href="buat_post.php"><button class="bg-[#0284c7] text-[10px]  px-[10px] py-[12px] rounded-[6px] text-[#fff] font-[700] hover:bg-[#4dbcf4]  duration-[0.4s] ease-in-out z-50">Create Discussion</button></a>
                 </div>
             </div>
             <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
