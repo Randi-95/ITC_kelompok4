@@ -165,7 +165,7 @@ if (!isset($_SESSION['user'])) {
                     <?php echo "<img src= 'data:image/jpeg;base64, $base64'  alt='' class='lg:w-[20rem] w-full'>" ?>
                 </div>
                 <div class="mt-6">
-                    <a href="lihat-post.php"><i class="fa-solid fa-message  text-white"></i></a>
+                    <a href="lihat-post.php?id=<?php echo $data['id'];?>"><i class="fa-solid fa-message  text-white"></i></a>
                     <p class = "truncate w-64 text-white text-sm"><?php echo htmlentities($data['deskripsi']); ?></p>
                     <span class="text-xs text-gray-400"><?php echo date('d M Y H:i', strtotime($data['tanggal'])); ?></span>
                 </div>

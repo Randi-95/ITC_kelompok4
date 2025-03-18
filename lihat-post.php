@@ -36,7 +36,7 @@ if (!isset($_SESSION['user'])) {
     <header class="bg-gray-800 shadow-lg z-50">
         <nav class="w-[90%] p-4 mx-auto flex items-center justify-between text-white">
             <div class="nav-judul">
-                <a href="forum.php"><h1 class="font-[700] text-[12px] md:text-[26px] judul text-white"><i class="fa-solid fa-arrow-left"></i> Forum<span class="text-[#0054AA] kata-2"> discussion </span></h1></a>
+                <a href="utama.php"><h1 class="font-[700] text-[12px] md:text-[26px] judul text-white"><i class="fa-solid fa-arrow-left"></i> Forum<span class="text-[#0054AA] kata-2"> discussion </span></h1></a>
             </div>
             <div class="nav-icon flex items-center">
                 <div class="flex gap-4">
@@ -102,7 +102,7 @@ if (!isset($_SESSION['user'])) {
                              <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-house-user mr-2"></i><span class="hidden md:inline">Post</span></li>
                         </div>
                     </a>
-                    <a href="forum.php"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
+                    <a href="utama.php"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
                         <li class="text-white font-[600] text-[20px] "><i class="fa-solid fa-comments mr-2"></i><span class="hidden md:inline">Forum</span></li>
                        </div>
                     </a>
@@ -130,14 +130,14 @@ if (!isset($_SESSION['user'])) {
         <?php
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $pdo = require 'koneksi.php';
-            $sql = "SELECT topik.*, users.username, users.email FROM topik
-                    INNER JOIN users ON topik.id_user=users.id
-                    WHERE topik.id=:id";
+            $sql = "SELECT postingan.*, users.username, users.email FROM postingan
+                    INNER JOIN users ON postingan.id_user=users.id
+                    WHERE postingan.id=:id";
             $query = $pdo->prepare($sql);
             $query->execute(array('id' => $_GET['id']));
-            $topik = $query->fetch();
+            $post = $query->fetch();
 
-            if (empty($topik)) {
+            if (empty($post)) {
                 echo '
                 <div class="flex">
                     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 max-w-lg rounded-lg shadow-lg">
@@ -154,13 +154,13 @@ if (!isset($_SESSION['user'])) {
                 <div class="bg-gray-800  p-6 rounded-2xl mb-6 shadow-lg">
                     <div class="flex items-start gap-4 mb-4">
                         <div class="flex-shrink-0">
-                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($topik['email']))); ?>?s=64&d=monsterid" 
+                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($post['email']))); ?>?s=64&d=monsterid" 
                                  class="rounded-full w-14 h-14 border-2 border-[#00A8E8]/30 shadow-lg shadow-[#00A8E8]/10">
                         </div>
                         <div class="flex flex-col">
                             <div class="flex items-center">
                                 <h2 class="text-xl font-bold text-white">
-                                    <?php echo htmlentities($topik['username'])?>
+                                    <?php echo htmlentities($post['username'])?>
                                 </h2>
                                 <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#00A8E8]/20 text-[#00A8E8]">
                                     Author
@@ -168,25 +168,28 @@ if (!isset($_SESSION['user'])) {
                             </div>
                             <div class="flex items-center text-xs text-gray-400 mt-1">
                                 <i class="fa-regular fa-clock mr-1.5"></i>
-                                <?php echo date('d M Y H:i', strtotime($topik['tanggal'])); ?>
+                                <?php echo date('d M Y H:i', strtotime($post['tanggal'])); ?>
                             </div>
                         </div>
                     </div>
 
                     <!-- Topic Content -->
+                    <h1 class="topic-title text-2xl md:text-3xl font-bold mb-4 text-white"><?php echo htmlentities($post['judul'])?></h1>
                     <div class="flex justify-center">
-                        <img src="assets/hero-bg.jpg" alt="" class="w-[40rem]">
+                       <?php 
+                       $base64 = base64_encode($post['image']);
+                       echo "<img src='data:image/jpeg;base64, $base64' alt='' class='w-[40rem]'>" ?>
                     </div>
 
                     <div class="text-gray-300 mb-4 leading-relaxed mt-2">
-                        <p class="whitespace-pre-wrap">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil earum qui explicabo iure dicta possimus, odio mollitia doloribus! Sunt recusandae nihil, autem magni velit corrupti illum veritatis quia perspiciatis eaque.</p>
+                        <p class="whitespace-pre-wrap"><?php echo nl2br(htmlentities($post['deskripsi']))?></p>
                     </div>
                     
                     <div class="flex flex-wrap gap-2 mt-6">
                         <span class="text-xs font-medium bg-gray-700/50 px-3 py-1.5 rounded-full text-gray-300">
                             <i class="fa-solid fa-message mr-1"></i> 
                             <?php 
-                                $commentSql = "SELECT COUNT(*) FROM komentar WHERE id_topik = :id";
+                                $commentSql = "SELECT COUNT(*) FROM komentar_post WHERE id_post = :id";
                                 $commentQuery = $pdo->prepare($commentSql);
                                 $commentQuery->execute(['id' => $_GET['id']]);
                                 echo $commentQuery->fetchColumn(); 
@@ -197,12 +200,12 @@ if (!isset($_SESSION['user'])) {
 
                     <hr class="mt-2 border border-[#0054AA]">
                     <?php
-                    $sql2 = "SELECT komentar.*, users.username, users.email FROM komentar
-                    INNER JOIN users ON users.id=komentar.id_user
-                    WHERE id_topik=:id_topik";
+                    $sql2 = "SELECT komentar_post.*, users.username, users.email FROM komentar_post
+                    INNER JOIN users ON users.id=komentar_post.id_user
+                    WHERE id_post=:id_post";
                     $query2 = $pdo->prepare($sql2);
                     $query2->execute(array(
-                        'id_topik' => $_GET['id']
+                        'id_post' => $_GET['id']
                     ));
                     while($komentar = $query2->fetch()) {?>
                     
@@ -221,7 +224,7 @@ if (!isset($_SESSION['user'])) {
                     <?php }?>
 
                     <hr class="mt-4 border-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60">
-                    <form method="POST" action="jawab-topik.php" class="mt-6">
+                    <form method="POST" action="jawab-post.php" class="mt-6">
                         <div class="flex items-start gap-4">
                             <div class="overflow-hidden rounded-full  p-[2px] bg-gradient-to-br from-blue-300 to-blue-600">
                                 <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=48&d=monsterid" class="rounded-full w-12 h-12">
@@ -232,7 +235,7 @@ if (!isset($_SESSION['user'])) {
                                         class="w-full p-3 text-white text-sm bg-[rgba(0,20,60,0.3)] backdrop-blur-sm border border-blue-500/30 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300 resize-none shadow-lg h-[120px]" 
                                         placeholder="Share your thoughts..." required></textarea>
                                 </div>
-                                <input type="hidden" value="<?php echo $topik['id'];?>" name="id_topik">
+                                <input type="hidden" value="<?php echo $post['id'];?>" name="id_post">
                             </div>
                         </div>
                         <div class="flex justify-end mb-[100px]">
