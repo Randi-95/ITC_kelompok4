@@ -142,59 +142,38 @@ if (!isset($_SESSION['user'])) {
                     <a href="buat_post.php"><button class="bg-[#0284c7] text-[10px]  px-[10px] py-[12px] rounded-[6px] text-[#fff] font-[700] hover:bg-[#4dbcf4]  duration-[0.4s] ease-in-out z-50">Create Discussion</button></a>
                 </div>
             </div>
+             <?php
+            if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { 
+                $pdo = require 'koneksi.php';
+                $sql = "SELECT judul, image, deskripsi, tanggal, username, email, postingan.id FROM postingan
+                INNER JOIN users ON postingan.id_user = users.id
+                ORDER BY tanggal DESC";
+                $query = $pdo->prepare($sql);
+                $query->execute();
+                ?>
+                <?php
+                while($data = $query->fetch()) {
+                    $base64 = base64_encode($data['image']); ?>
             <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
                 <div class="flex items-center gap-2">
                     <div class="flex items-center gap-2">
-                        <img src="assets/33.png" class="rounded-[50%] w-10">
-                        <p class="text-white font-bold text-xl">Randi Permana</p>
+                        <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($data['email']))); ?>?s=48&d=monsterid" class="rounded-[50%] w-10">
+                        <p class="text-white font-bold text-xl"><?php echo htmlentities($data['username']); ?> </p>
                     </div>
                 </div>
                 <div class="mt-2 flex justify-center">
-                    <img src="assets/hero-bg.jpg" alt="" class="lg:w-[20rem] w-full"> 
+                    <?php echo "<img src= 'data:image/jpeg;base64, $base64'  alt='' class='lg:w-[20rem] w-full'>" ?>
                 </div>
                 <div class="mt-6">
                     <a href=""><i class="fa-solid fa-message  text-white"></i></a>
-                    <p class = "truncate w-64 text-white text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit architecto reprehenderit error consectetur quisquam quia nam ullam eveniet, alias libero quaerat itaque dolorum ea laborum, nesciunt velit iure rerum.</p>
-                    <span class="text-xs text-gray-400">16 Mar 2025 09:06</span>
+                    <p class = "truncate w-64 text-white text-sm"><?php echo htmlentities($data['deskripsi']); ?></p>
+                    <span class="text-xs text-gray-400"><?php echo date('d M Y H:i', strtotime($data['tanggal'])); ?></span>
                 </div>
                                    
             </figure>
+            <?php } ?>
+            <?php } ?>
             
-            <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
-                <div class="flex items-center gap-2">
-                    <div class="flex items-center gap-2">
-                        <img src="assets/33.png" class="rounded-[50%] w-10">
-                        <p class="text-white font-bold text-xl">Randi Permana</p>
-                    </div>
-                </div>
-                <div class="mt-2 flex justify-center">
-                    <img src="assets/hero-bg.jpg" alt="" class="lg:w-[20rem] w-full"> 
-                </div>
-                <div class="mt-6">
-                    <a href=""><i class="fa-solid fa-message  text-white"></i></a>
-                    <p class = "truncate w-64 text-white text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit architecto reprehenderit error consectetur quisquam quia nam ullam eveniet, alias libero quaerat itaque dolorum ea laborum, nesciunt velit iure rerum.</p>
-                    <span class="text-xs text-gray-400">16 Mar 2025 09:06</span>
-                </div>
-                                   
-            </figure>
-
-             <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
-                <div class="flex items-center gap-2">
-                    <div class="flex items-center gap-2">
-                        <img src="assets/33.png" class="rounded-[50%] w-10">
-                        <p class="text-white font-bold text-xl">Randi Permana</p>
-                    </div>
-                </div>
-                <div class="mt-2 flex justify-center">
-                    <img src="assets/hero-bg.jpg" alt="" class="lg:w-[20rem] w-full"> 
-                </div>
-                <div class="mt-6">
-                    <a href=""><i class="fa-solid fa-message  text-white"></i></a>
-                    <p class = "truncate w-64 text-white text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit architecto reprehenderit error consectetur quisquam quia nam ullam eveniet, alias libero quaerat itaque dolorum ea laborum, nesciunt velit iure rerum.</p>
-                    <span class="text-xs text-gray-400">16 Mar 2025 09:06</span>
-                </div>
-                                   
-            </figure>
         </div>
     </main>
 

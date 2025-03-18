@@ -1,15 +1,16 @@
 <?php
 session_start();
-if(!empty($_POST)) {
+if(!empty($_POST) && !empty($_POST)) {
     $pdo = require 'koneksi.php';
-    $sql = "insert into topik (judul, deskripsi, tanggal, id_user) values (:judul, :deskripsi, now(), :id_user)";
+    $sql = "insert into postingan (judul, image, deskripsi, tanggal, id_user) values (:judul, :image, :deskripsi, now(), :id_user)";
     $query = $pdo->prepare($sql);
     $query->execute(array(
         'judul' => $_POST['judul'],
+        'image' => file_get_contents($_FILES['image']['tmp_name']),
         'deskripsi' => $_POST['deskripsi'],
         'id_user' => $_SESSION['user']['id'],
     ));
-    header("location: buat_diskusi.php?sukses=1");
+    header("location: buat_post.php?sukses=1");
     exit;
 }
 ?>
@@ -96,12 +97,12 @@ if(!empty($_POST)) {
                   <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span>Topik berhasil dibuat!</span>
+                  <span>Postingan berhasil dibuat!</span>
                 </div>';
       }
       ?>
       
-      <form method="POST" action="" class="space-y-6">
+      <form method="POST" action="" class="space-y-6" enctype="multipart/form-data">
         <div>
           <label class="block text-blue-400 font-medium mb-2">Judul Postingan</label>
           <input 
@@ -117,7 +118,8 @@ if(!empty($_POST)) {
           <label class="block text-blue-400 font-medium mb-2">Foto Postingan</label>
           <input 
             type="file"
-            name="foto" 
+            name="image"
+            accept="image/*" 
             class="input-field w-full p-4 text-gray-200 rounded-lg focus:outline-none" 
             required
           >
