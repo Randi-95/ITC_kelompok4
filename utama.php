@@ -130,7 +130,7 @@ if (!isset($_SESSION['user'])) {
 
         <!-- container utama -->
         <div class="center p-2">
-            <div class="h-[85px] bg-gray-800 rounded-[16px] shadow-lg p-2 border border-gray-700">
+            <div class=" bg-gray-800 rounded-[16px] shadow-lg p-2 border border-gray-700">
                 <div class="flex gap-[6px] search">
                     <p class="flex items-center"><i class="fa-solid fa-circle-user text-gray-400 text-[25px]"></i></p>
                     <div class="relative search w-[100%]">
@@ -138,7 +138,26 @@ if (!isset($_SESSION['user'])) {
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-gray-400 text-[14px]"></i>
                     </div>
                 </div>
+                <div class="ml-[30px] mt-[10px]">
+                    <a href="buat_diskusi.php"><button class="bg-[#0284c7] text-[10px]  px-[10px] py-[12px] rounded-[6px] text-[#fff] font-[700] hover:bg-[#4dbcf4]  duration-[0.4s] ease-in-out z-50">Create Discussion</button></a>
+                </div>
             </div>
+            <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/33.png" class="rounded-[50%] w-10">
+                        <p class="text-white font-bold text-xl">Randi Permana</p>
+                    </div>
+                        <blockquote class="text-gray-700 italic">
+                        <p>
+                            <a href="" class="text-blue-600 font-semibold hover:underline"></a>
+                        </p>
+                        </blockquote>
+                    </div>
+                        <figcaption class="text-gray-500 text-[10px] mt-2">
+                                By: <span class="font-medium text-gray-300"> </span>
+                        </figcaption>              
+            </figure> 
         </div>
     </main>
 

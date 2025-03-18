@@ -11,6 +11,57 @@ $query = $pdo->prepare($sql);
 $query->execute(array('id' => $_SESSION['user']['id']));
 $user = $query->fetch();
 
+$error = '';
+if(!empty($_POST)) {
+    $sqlEmail = "SELECT count(*) FROM users
+        WHERE email=:email and id!=:id";
+    $queryEmail = $pdo->prepare($sqlEmail);
+    $queryEmail->execute(array(
+        'email' => $_POST['email'],
+        'id' => $_SESSION['user']['id']
+    ));
+    $count = $queryEmail->fetchColumn();
+    if($count > 0) {
+        $error = 'Email is already used';
+    } else {
+        $sqlUpdate = 'UPDATE users SET username=:username, email=:email
+        WHERE id=:id';
+        $queryUpdate = $pdo->prepare($sqlUpdate);
+        $queryUpdate->execute(array(
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'id' => $_SESSION['user']['id']
+        ));
+
+        // Update session
+        $_SESSION['user']['username'] = $_POST['username'];
+        $_SESSION['user']['email'] = $_POST['email'];
+
+        if(!empty($_POST['password_lama']) && !empty($_POST['password_baru'])) {
+            if(sha1($_POST['password_lama']) != $user['password']) {
+                $error = "Old password is wrong";
+            } else {
+                if($_POST['password_baru'] != $_POST['password_baru2']) {
+                    $error = 'Confirm Password must be the same';
+                } else {
+                    $sqlPassword = "UPDATE users SET password=:password
+                    WHERE id=:id";
+                    $queryPassword = $pdo->prepare($sqlPassword);
+                    $queryPassword->execute(array(
+                        'password' => sha1($_POST['password_baru']),
+                        'id' => $_SESSION['user']['id']
+                    ));
+                    header("location: profile.php?changed=1");
+                }
+            }
+        } else {
+            header("location: profile.php?changed=1");
+        }
+
+        
+    }
+}
+
 
 ?>
 
@@ -56,14 +107,14 @@ $user = $query->fetch();
                 <div class="flex flex-col md:flex-row items-center  gap-6">
                     <div class="relative">
                         <div class="rounded-full border border-[rgba(42,67,117,0.8)]">
-                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user['email']))); ?>?s=64&d=monsterid" 
+                            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($_SESSION['user']['email']))); ?>?s=64&d=monsterid" 
                             class="rounded-full w-20 h-20 ">
                         </div>
                     </div>
                     
                     <div class="flex-1 text-center md:text-left">
-                        <h2 class="text-2xl font-bold text-white mb-1"><?php echo htmlentities($user['username'])?></h2>
-                        <p class="text-blue-300/80 mb-3"><?php echo htmlentities($user['email'])?></p>
+                        <h2 class="text-2xl font-bold text-white mb-1"><?php echo htmlentities($_SESSION['user']['username'])?></h2>
+                        <p class="text-blue-300/80 mb-3"><?php echo htmlentities($_SESSION['user']['email'])?></p>
                         
                     </div>
                 </div>
@@ -84,15 +135,21 @@ $user = $query->fetch();
         <div class="border border-[rgba(42,67,117,0.8)] rounded-xl mb-8">
             <div class="bg-gradient-to-br from-[rgba(13,27,55,0.8)] to-[rgba(5,15,35,0.9)] backdrop-blur-sm p-6 rounded-xl">
                 <h3 class="text-xl font-semibold mb-6 text-white">Edit Profile</h3>
-                <form>
+                <?php if ($error != '') {
+                   echo '<p class="text-red-600">' .$error.'</p>';
+                }?> 
+                <?php if($_GET['changed'] && $_GET['changed'] == '1') {?>
+                    <p class="text-green-500">User Information has been changed</p>
+                    <?php }?>
+                <form method="POST" action="">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="username" class="block mb-2 text-sm font-medium text-blue-300">Username</label>
-                            <input type="text" id="username" name="username" value="<?php echo ($user['username'])?>" class="w-full p-3 text-white text-sm bg-[rgba(0,20,60,0.3)] backdrop-blur-sm border border-blue-500/30 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300" required>
+                            <input type="text" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ($user['username'])?>" class="w-full p-3 text-white text-sm bg-[rgba(0,20,60,0.3)] backdrop-blur-sm border border-blue-500/30 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300" required>
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-blue-300">Email</label>
-                            <input type="email" id="email" name="email" value="<?php echo ($user['email'])?>" class="w-full p-3 text-white text-sm bg-[rgba(0,20,60,0.3)] backdrop-blur-sm border border-blue-500/30 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300" required>
+                            <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ($user['email'])?>" class="w-full p-3 text-white text-sm bg-[rgba(0,20,60,0.3)] backdrop-blur-sm border border-blue-500/30 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300" required>
                         </div>
                     </div>
                     
@@ -113,6 +170,8 @@ $user = $query->fetch();
                             </div>'
                         </div>
                     </div>
+
+                    
                     
                     <div class="flex justify-end">
                         <button type="submit" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-blue-500/30 transition-all duration-300 flex items-center gap-2">
