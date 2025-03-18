@@ -85,28 +85,9 @@
     </div>
     </div>
 
-    
+ 
 
-
-  <div class="min-h-screen relative bg-gradient-to-b from-[#0a1321] to-[#0f1c30] overflow-hidden" id="about">
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute top-0 left-0 w-full h-full opacity-5">
-        <div class="absolute w-full h-full">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <pattern id="circuitPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M20 10 L80 10 L80 30 L100 30" stroke="#4f8fff" stroke-width="0.5" fill="none"/>
-              <path d="M30 20 L30 80 L50 80 L50 100" stroke="#4f8fff" stroke-width="0.5" fill="none"/>
-              <circle cx="80" cy="30" r="2" fill="#4f8fff"/>
-              <circle cx="30" cy="80" r="2" fill="#4f8fff"/>
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#circuitPattern)"/>
-          </svg>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container mx-auto px-4 py-16 relative z-10">
+    <div class="container mx-auto px-4 py-16 relative z-10 bg-gradient-to-b from-[#0a1321] to-[#111f35]">
       <div class="flex flex-col items-center justify-center pt-16 md:pt-24">
         <!-- Section header with icon -->
         <div class="flex items-center space-x-2 mb-4">
@@ -143,9 +124,7 @@
   </div>
 
 
-      <section id="about" class="py-24 px-6 lg:px-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
-
-    
+    <section id="about" class="py-24 px-6 lg:px-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden"> 
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
         <div data-aos="fade-right" class="space-y-6">
             <div class="flex items-center space-x-3 mb-2">
@@ -343,8 +322,7 @@
   </div>
 </div>
 
-  <div class="kenapa-harus bg-gray-900">
-      <div class="container mx-auto bg-gray-900 lg:flex lg:flex-col lg:justify-center rounded-2xl py-16 px-4 lg:px-20"> 
+      <div class="container mx-auto bg-gradient-to-br from-gray-900 to-gray-800 lg:flex lg:flex-col lg:justify-center rounded-2xl py-16 px-4 lg:px-20"> 
           <div class="flex flex-col items-center justify-center">
             <div class="flex items-center space-x-3 mb-3">
               <div class="h-1 w-12 bg-blue-500 rounded-full"></div>
@@ -408,55 +386,55 @@
               <img class='m-auto rounded-2xl' src="assets/mockup1.png" alt="" width="400px"/>
             </div>
           </div>
-      </div>
-    </div>  
+      </div> 
 
-      <div class="max-w-2xl mx-auto my-10 p-5">
-          <div class="flex flex-col items-center justify-center mb-4">
-            <div class="flex items-center space-x-3 mb-3">
-              <div class="h-1 w-12 bg-blue-500 rounded-full"></div>
-              <i class="fa-solid fa-question text-blue-400"></i>
-              <div class="h-1 w-12 bg-blue-500 rounded-full"></div>
+      <section class="bg-gradient-to-b from-[#0a1321] to-[#111f35] h-full">
+        <div class="max-w-2xl mx-auto pb-20 p-5 ">
+            <div class="flex flex-col items-center justify-center mb-4">
+              <div class="flex items-center space-x-3 mb-3">
+                <div class="h-1 w-12 bg-blue-500 rounded-full"></div>
+                <i class="fa-solid fa-question text-blue-400"></i>
+                <div class="h-1 w-12 bg-blue-500 rounded-full"></div>
+              </div>
+              
+              <h2 class="text-xl md:text-3xl font-extrabold text-white text-center mb-3">
+                FREQUENTLY <span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">ASKED</span>  QUESTIONS
+              </h2>
+              <p class="text-[#bab3b3] text-sm md:text-lg text-center max-w-lg mb-2">
+                Find Answers to Your Most Common Concerns.
+              </p>
+              <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mt-4"></div>
             </div>
-            
-            <h2 class="text-xl md:text-3xl font-extrabold text-white text-center mb-3">
-              FREQUENTLY <span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">ASKED</span>  QUESTIONS
-            </h2>
-            
-            <p class="text-[#bab3b3] text-sm md:text-lg text-center max-w-lg mb-2">
-               Find Answers to Your Most Common Concerns.
-            </p>
-            <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mt-4"></div>
-          </div>
-        <div class="space-y-4">
-            <div class="border border-gray-700 rounded-lg overflow-hidden">
-                <button class="w-full p-4 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 faq-toggle">
-                    <span class="text-white font-bold">What is CyberSec?</span>
-                    <i class="icon fas fa-chevron-down text-white"></i>
-                </button>
-                <div class="p-4 hidden bg-gray-700 text-white">CyberSec is a community dedicated to cybersecurity discussions and learning.</div>
+            <div class="space-y-4">
+                <div class="border border-gray-700 rounded-lg overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 faq-toggle">
+                        <span class="text-white font-bold">What is CyberSec?</span>
+                        <i class="icon fas fa-chevron-down text-white"></i>
+                    </button>
+                    <div class="p-4 hidden bg-gray-700 text-white">CyberSec is a community dedicated to cybersecurity discussions and learning.</div>
+                </div>
+                <div class="border border-gray-700 rounded-lg overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 faq-toggle">
+                        <span class="text-white font-bold">How do I join CyberSec?</span>
+                        <i class="icon fas fa-chevron-down text-white"></i>
+                    </button>
+                    <div class="p-4 hidden bg-gray-700 text-white">You can join by registering on our platform and becoming a part of our secure community.</div>
+                </div>
+                <div class="border border-gray-700 rounded-lg overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 faq-toggle">
+                        <span class="text-white font-bold">Is CyberSec free to use?</span>
+                        <i class="icon fas fa-chevron-down text-white"></i>
+                    </button>
+                    <div class="p-4 hidden bg-gray-700 text-white">Yes! CyberSec is completely free for anyone passionate about cybersecurity.</div>
+                </div>
+              </div>
             </div>
-            <div class="border border-gray-700 rounded-lg overflow-hidden">
-                <button class="w-full p-4 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 faq-toggle">
-                    <span class="text-white font-bold">How do I join CyberSec?</span>
-                    <i class="icon fas fa-chevron-down text-white"></i>
-                </button>
-                <div class="p-4 hidden bg-gray-700 text-white">You can join by registering on our platform and becoming a part of our secure community.</div>
-            </div>
-            <div class="border border-gray-700 rounded-lg overflow-hidden">
-                <button class="w-full p-4 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 faq-toggle">
-                    <span class="text-white font-bold">Is CyberSec free to use?</span>
-                    <i class="icon fas fa-chevron-down text-white"></i>
-                </button>
-                <div class="p-4 hidden bg-gray-700 text-white">Yes! CyberSec is completely free for anyone passionate about cybersecurity.</div>
-            </div>
-          </div>
-        </div>
+      </section>
         
 
 
 
-        <section class="py-16 px-6 lg:px-20 bg-gray-900  mx-auto">
+        <section class="py-16 px-6 lg:px-20 bg-gradient-to-br from-gray-900 to-gray-800 mx-auto">
           <div class="max-w-7xl">
             <div class="flex flex-col items-center justify-center mb-4">
               <div class="flex items-center space-x-3 mb-3">

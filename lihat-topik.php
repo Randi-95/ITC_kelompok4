@@ -33,7 +33,7 @@ if (!isset($_SESSION['user'])) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       </head>
 <body class="bg-gray-900 min-h-screen">
-    <header class="bg-gray-800 shadow-lg">
+    <header class="bg-gray-800 shadow-lg z-50">
         <nav class="w-[90%] p-4 mx-auto flex items-center justify-between text-white">
             <div class="nav-judul">
                 <a href="forum.php"><h1 class="font-[700] text-[12px] md:text-[26px] judul text-white"><i class="fa-solid fa-arrow-left"></i> Forum<span class="text-[#0054AA] kata-2"> discussion </span></h1></a>
@@ -151,7 +151,7 @@ if (!isset($_SESSION['user'])) {
             }else {
                 ?>
                     <!-- Topic Header -->
-                <div class="bg-gradient-to-br bg-[rgba(0,20,60,0.3)] p-6 rounded-2xl mb-6 shadow-lg">
+                <div class="bg-gray-800  p-6 rounded-2xl mb-6 shadow-lg">
                     <div class="flex items-start gap-4 mb-4">
                         <div class="flex-shrink-0">
                             <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($topik['email']))); ?>?s=64&d=monsterid" 

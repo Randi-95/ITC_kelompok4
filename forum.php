@@ -134,21 +134,18 @@ if (!isset($_SESSION['user'])) {
                     </div>
                 </div>
 
-                <div class="w-[100%] ml-[30px] mt-[10px]">
+                <div class="ml-[30px] mt-[10px]">
                     <a href="buat_diskusi.php"><button class="bg-[#0284c7] text-[10px]  px-[10px] py-[12px] rounded-[6px] text-[#fff] font-[700] hover:bg-[#4dbcf4]  duration-[0.4s] ease-in-out z-50">Create Discussion</button></a>
                 </div>
             </div>
             <?php
-            if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { 
+           if(isset($_SESSION['user']) && !empty($_SESSION['user'])) { 
                 $pdo = require 'koneksi.php';
                 $sql = "SELECT judul, tanggal, username, email, topik.id FROM topik
                 INNER JOIN users ON topik.id_user = users.id
-                WHERE topik.id_user = :id_user
                 ORDER BY tanggal DESC";
-    
-        $query = $pdo->prepare($sql);
-        $query->bindParam(':id_user', $_SESSION['user']['id'], PDO::PARAM_INT);
-        $query->execute();
+                $query = $pdo->prepare($sql);
+                $query->execute();
                 ?>
                 <?php 
                 while($data = $query->fetch()) {?> 
