@@ -6,7 +6,7 @@ if (empty($_POST)) {
 }
 
 
-if (!isset($_POST['id_topik']) || empty($__POST['id_topik'])) {
+if (!isset($_POST['id_post']) || empty($__POST['id_post'])) {
     header("Location: utama.php");
     
 }
