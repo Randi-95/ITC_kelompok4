@@ -148,16 +148,53 @@ if (!isset($_SESSION['user'])) {
                         <img src="assets/33.png" class="rounded-[50%] w-10">
                         <p class="text-white font-bold text-xl">Randi Permana</p>
                     </div>
-                        <blockquote class="text-gray-700 italic">
-                        <p>
-                            <a href="" class="text-blue-600 font-semibold hover:underline"></a>
-                        </p>
-                        </blockquote>
+                </div>
+                <div class="mt-2 flex justify-center">
+                    <img src="assets/hero-bg.jpg" alt="" class="lg:w-[20rem] w-full"> 
+                </div>
+                <div class="mt-6">
+                    <a href=""><i class="fa-solid fa-message  text-white"></i></a>
+                    <p class = "truncate w-64 text-white text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit architecto reprehenderit error consectetur quisquam quia nam ullam eveniet, alias libero quaerat itaque dolorum ea laborum, nesciunt velit iure rerum.</p>
+                    <span class="text-xs text-gray-400">16 Mar 2025 09:06</span>
+                </div>
+                                   
+            </figure>
+            
+            <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/33.png" class="rounded-[50%] w-10">
+                        <p class="text-white font-bold text-xl">Randi Permana</p>
                     </div>
-                        <figcaption class="text-gray-500 text-[10px] mt-2">
-                                By: <span class="font-medium text-gray-300"> </span>
-                        </figcaption>              
-            </figure> 
+                </div>
+                <div class="mt-2 flex justify-center">
+                    <img src="assets/hero-bg.jpg" alt="" class="lg:w-[20rem] w-full"> 
+                </div>
+                <div class="mt-6">
+                    <a href=""><i class="fa-solid fa-message  text-white"></i></a>
+                    <p class = "truncate w-64 text-white text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit architecto reprehenderit error consectetur quisquam quia nam ullam eveniet, alias libero quaerat itaque dolorum ea laborum, nesciunt velit iure rerum.</p>
+                    <span class="text-xs text-gray-400">16 Mar 2025 09:06</span>
+                </div>
+                                   
+            </figure>
+
+             <figure class="mt-2 border-l-4 border-[#0054AA] pl-4 bg-gray-800 p-4 shadow-md rounded-lg w-[100%]">
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/33.png" class="rounded-[50%] w-10">
+                        <p class="text-white font-bold text-xl">Randi Permana</p>
+                    </div>
+                </div>
+                <div class="mt-2 flex justify-center">
+                    <img src="assets/hero-bg.jpg" alt="" class="lg:w-[20rem] w-full"> 
+                </div>
+                <div class="mt-6">
+                    <a href=""><i class="fa-solid fa-message  text-white"></i></a>
+                    <p class = "truncate w-64 text-white text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit architecto reprehenderit error consectetur quisquam quia nam ullam eveniet, alias libero quaerat itaque dolorum ea laborum, nesciunt velit iure rerum.</p>
+                    <span class="text-xs text-gray-400">16 Mar 2025 09:06</span>
+                </div>
+                                   
+            </figure>
         </div>
     </main>
 
