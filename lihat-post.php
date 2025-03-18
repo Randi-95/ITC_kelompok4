@@ -36,7 +36,7 @@ if (!isset($_SESSION['user'])) {
     <header class="bg-gray-800 shadow-lg z-50">
         <nav class="w-[90%] p-4 mx-auto flex items-center justify-between text-white">
             <div class="nav-judul">
-                <a href="utama.php"><h1 class="font-[700] text-[12px] md:text-[26px] judul text-white"><i class="fa-solid fa-arrow-left"></i> Forum<span class="text-[#0054AA] kata-2"> discussion </span></h1></a>
+                <a href="utama.php"><h1 class="font-[700] text-[12px] md:text-[26px] judul text-white"><i class="fa-solid fa-arrow-left"></i> Post<span class="text-[#0054AA] kata-2"> Comments </span></h1></a>
             </div>
             <div class="nav-icon flex items-center">
                 <div class="flex gap-4">

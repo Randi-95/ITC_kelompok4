@@ -119,7 +119,7 @@ if (!isset($_SESSION['user'])) {
                             <li><a href="" class="text-white text-[10px] font-[600] bg-[#00A8E8] p-[4px] rounded-md hover:bg-[#0054AA] duration-[0.2s] ease-in">#encryption</a></li>
                     </ul>
                     </div>
-                    <a href="index.html"><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
+                    <a href=""><div class="flex hover:bg-[#00A9D3] duration-[0.2s] mx-auto px-4 py-2 rounded-lg w-[80%]">
                         <li class="text-white font-[600] text-[20px]"><i class="fa-solid fa-gear mr-2"></i><span class="hidden md:inline">Settings</span></li>
                         </div>
                     </a>

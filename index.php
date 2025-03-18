@@ -44,8 +44,8 @@
         </div>
         <ul class="md:flex space-y-4 md:space-y-0 mt-[20%] md:mt-0">
           <li><a href="#" class="font-[700] text-[16px] text-white lg:text-[16px] lg:font-[700] py-[8px] px-[15px] hover:text-[#0055AA] duration-[0.2s]">Home</a></li>
-          <li><a href="#about" class="font-[700] text-[16px] text-white lg:text-[16px] lg:font-[700]  py-[8px] px-[15px] hover:text-[#0055AA] duration-[0.2s]">Post</a></li>
-          <li><a href="#" class="font-[700] text-[16px] text-white lg:text-[16px] lg:font-[700]  py-[8px] px-[15px] hover:text-[#0055AA] duration-[0.2s]">Chat</a></li>
+          <li><a href="login.php" class="font-[700] text-[16px] text-white lg:text-[16px] lg:font-[700]  py-[8px] px-[15px] hover:text-[#0055AA] duration-[0.2s]">Post</a></li>
+          <li><a href="login.php" class="font-[700] text-[16px] text-white lg:text-[16px] lg:font-[700]  py-[8px] px-[15px] hover:text-[#0055AA] duration-[0.2s]">Chat</a></li>
           <div class="flex justify-center md:hidden">
             <div class="absolute bottom-20 flex">
               <a href="register.php"><button class="p-[3px] px-[10px] rounded-md button"><p class="text-[16px] text-white font-[600] ">Register</p></button></a>
@@ -106,7 +106,7 @@
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 mb-16 md:mb-24">
-          <a href="#" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-md shadow-lg hover:shadow-blue-900/20 transition duration-300 flex items-center justify-center group">
+          <a href="login.php" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-md shadow-lg hover:shadow-blue-900/20 transition duration-300 flex items-center justify-center group">
             <i class="fas fa-user-plus mr-2 group-hover:animate-pulse"></i> Join Community
           </a>
           <a href="#" class="px-8 py-3 bg-transparent border border-blue-500 text-blue-400 font-semibold rounded-md hover:bg-blue-900/10 transition duration-300 flex items-center justify-center">
@@ -232,7 +232,7 @@
                 <i class="fas fa-users text-blue-400 text-xl"></i>
               </div>
               
-              <h3 class="text-white text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">Komunitas</h3>
+              <h3 class="text-white text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">Community</h3>
               
               <p class="text-gray-300 text-sm leading-relaxed">
                 A community or forum where users can exchange information about Cyber Security, collaborate on projects, and build a network of like-minded professionals.
@@ -282,7 +282,7 @@
                 <i class="fas fa-question-circle text-blue-400 text-xl"></i>
               </div>
               
-              <h3 class="text-white text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">Tanya Jawab</h3>
+              <h3 class="text-white text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">Question and answer</h3>
               
               <p class="text-gray-300 text-sm leading-relaxed">
                 Users can ask and answer questions, share experiences, and engage in discussions together about cybersecurity challenges, solutions, and best practices.
@@ -322,7 +322,7 @@
   </div>
 </div>
 
-      <div class="container mx-auto bg-gradient-to-br from-gray-900 to-gray-800 lg:flex lg:flex-col lg:justify-center rounded-2xl py-16 px-4 lg:px-20"> 
+      <div class="container mx-auto bg-gradient-to-br from-gray-900 to-gray-800 lg:flex lg:flex-col lg:justify-center rounded-2xl py-16 px-4 lg:px-20" id="why"> 
           <div class="flex flex-col items-center justify-center">
             <div class="flex items-center space-x-3 mb-3">
               <div class="h-1 w-12 bg-blue-500 rounded-full"></div>
@@ -388,7 +388,7 @@
           </div>
       </div> 
 
-      <section class="bg-gradient-to-b from-[#0a1321] to-[#111f35] h-full">
+      <section class="bg-gradient-to-b from-[#0a1321] to-[#111f35] h-full" id="faq">
         <div class="max-w-2xl mx-auto pb-20 p-5 ">
             <div class="flex flex-col items-center justify-center mb-4">
               <div class="flex items-center space-x-3 mb-3">
@@ -434,7 +434,7 @@
 
 
 
-        <section class="py-16 px-6 lg:px-20 bg-gradient-to-br from-gray-900 to-gray-800 mx-auto">
+        <section class="py-16 px-6 lg:px-20 bg-gradient-to-br from-gray-900 to-gray-800 mx-auto" id="testimoni">
           <div class="max-w-7xl">
             <div class="flex flex-col items-center justify-center mb-4">
               <div class="flex items-center space-x-3 mb-3">
@@ -534,10 +534,11 @@
             <h3 class="text-lg font-semibold text-white mb-6">Quick Links</h3>
             <ul class="space-y-3">
               <li><a href="#" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> Home</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> About Us</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> Features</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> FAQ</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> TESTIMONIALS</a></li>
+              <li><a href="#about" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> About Us</a></li>
+              <li><a href="#features" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> Features</a></li>
+              <li><a href="#why" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> Reason</a></li>
+              <li><a href="#faq" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> FAQ</a></li>
+              <li><a href="#testimoni" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-blue-500"></i> TESTIMONIALS</a></li>
             </ul>
           </div>
           
